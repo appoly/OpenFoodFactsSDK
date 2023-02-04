@@ -28,6 +28,7 @@ final class OpenFoodFactsSDKTests: XCTestCase {
                 "product_name_en": "Product Name",
                 "quantity": "1kg",
                 "ingredients_text_en": "Ingredients Text",
+                "ingredients_analysis_tags": ["en:palm-oil-free", "en:maybe-vegan", "en:maybe-vegetarian"],
                 "nutriments": {
                     "carbohydrates_100g": 1,
                     "carbohydrates_unit": "g",
@@ -67,6 +68,7 @@ final class OpenFoodFactsSDKTests: XCTestCase {
             XCTAssertEqual(productResponse.nutriments.energyKcal100G, 2)
             XCTAssertEqual(productResponse.nutriments.energyKcalUnit, "kcal")
             XCTAssertEqual(productResponse.nutriments.fat100G, 3)
+            XCTAssertEqual(productResponse.analysisTags, [.palmOilFree, .maybeVegan, .maybeVegetarian])
             XCTAssertEqual(productResponse.nutriments.fatUnit, "g")
             XCTAssertEqual(productResponse.nutriments.proteins100G, 4)
             XCTAssertEqual(productResponse.nutriments.proteinsUnit, "g")

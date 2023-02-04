@@ -23,6 +23,7 @@ public struct ProductResponse: Codable {
     let quantity: String
     let ingredients: String
     let nutriments: NutrimentsResponse
+    let analysisTags: [AnalysisTag]
     
     
     
@@ -43,6 +44,7 @@ public struct ProductResponse: Codable {
         case quantity
         case ingredients = "ingredients_text_en"
         case nutriments
+        case analysisTags = "ingredients_analysis_tags"
     }
     
     
@@ -61,6 +63,7 @@ public struct ProductResponse: Codable {
         quantity = try container.decode(String.self, forKey: .quantity)
         ingredients = try container.decode(String.self, forKey: .ingredients)
         nutriments = try container.decode(NutrimentsResponse.self, forKey: .nutriments)
+        analysisTags = try container.decode([AnalysisTag].self, forKey: .analysisTags)
     }
     
 }
