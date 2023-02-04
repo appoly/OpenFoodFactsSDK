@@ -24,6 +24,7 @@ public struct ProductResponse: Codable {
     let ingredients: String
     let nutriments: NutrimentsResponse
     let analysisTags: [AnalysisTag]
+    let ingredientsVerified: Bool
     
     
     
@@ -45,6 +46,8 @@ public struct ProductResponse: Codable {
         case ingredients = "ingredients_text_en"
         case nutriments
         case analysisTags = "ingredients_analysis_tags"
+        case states
+        case ingredientsVerified = "ingredients_verified"
     }
     
     
@@ -64,6 +67,26 @@ public struct ProductResponse: Codable {
         ingredients = try container.decode(String.self, forKey: .ingredients)
         nutriments = try container.decode(NutrimentsResponse.self, forKey: .nutriments)
         analysisTags = try container.decode([AnalysisTag].self, forKey: .analysisTags)
+        ingredientsVerified = try container.decode(String.self, forKey: .states).contains("en:ingredients-to-be-completed")
+    }
+    
+    
+    
+    // MARK: - Encodable
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(allergens, forKey: .allergens)
+        try container.encode(brands, forKey: .brands)
+        try container.encode(categories, forKey: .categories)
+        try container.encode(genericName, forKey: .genericName)
+        try container.encode(productName, forKey: .productName)
+        try container.encode(quantity, forKey: .quantity)
+        try container.encode(ingredients, forKey: .ingredients)
+        try container.encode(nutriments, forKey: .nutriments)
+        try container.encode(analysisTags, forKey: .analysisTags)
+        try container.encode(ingredientsVerified, forKey: .ingredientsVerified)
     }
     
     
