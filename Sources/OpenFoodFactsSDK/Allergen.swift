@@ -76,35 +76,35 @@ public enum Allergen: String, Codable, Identifiable, Hashable, CaseIterable {
     public var image: Image {
         switch self {
             case .crustaceans:
-                return .init("crustaceans")
+            return .init("crustaceans", bundle: .module)
             case .peanuts:
-                return .init("peanut")
+                return .init("peanut", bundle: .module)
             case .nuts:
-                return .init("treenut")
+                return .init("treenut", bundle: .module)
             case .mustard:
-                return .init("mustard")
+                return .init("mustard", bundle: .module)
             case .lupin:
-                return .init("lupin")
+                return .init("lupin", bundle: .module)
             case .gluten:
-                return .init("gluten")
+                return .init("gluten", bundle: .module)
             case .soyBeans:
-                return .init("soya")
+                return .init("soya", bundle: .module)
             case .celery:
-                return .init("celery")
+                return .init("celery", bundle: .module)
             case .sulphurDioxideAndSulphites:
-                return .init("sulphurdioxide")
+                return .init("sulphurdioxide", bundle: .module)
             case .fish:
-                return .init("fish")
+                return .init("fish", bundle: .module)
             case .molluscs:
-                return .init("molluscs")
+                return .init("molluscs", bundle: .module)
             case .milk:
-                return .init("milk")
+                return .init("milk", bundle: .module)
             case .eggs:
-                return .init("eggs")
+                return .init("eggs", bundle: .module)
             case .sesameSeeds:
-                return .init("sesame")
+                return .init("sesame", bundle: .module)
             case .wheat:
-                return .init("wheat")
+                return .init("wheat", bundle: .module)
         }
     }
     
