@@ -29,7 +29,6 @@ public enum Allergen: String, Codable, Identifiable, Hashable, CaseIterable {
     case milk = "en:milk"
     case eggs = "en:eggs"
     case sesameSeeds = "en:sesame-seeds"
-    case wheat = "en:wheat"
     
     
     
@@ -67,8 +66,6 @@ public enum Allergen: String, Codable, Identifiable, Hashable, CaseIterable {
                 return "Eggs"
             case .sesameSeeds:
                 return "Sesame"
-            case .wheat:
-                return "wheat"
         }
     }
     
@@ -86,7 +83,7 @@ public enum Allergen: String, Codable, Identifiable, Hashable, CaseIterable {
             case .lupin:
                 return .init("lupin", bundle: .module)
             case .gluten:
-                return .init("gluten", bundle: .module)
+                return .init("wheat", bundle: .module)
             case .soyBeans:
                 return .init("soya", bundle: .module)
             case .celery:
@@ -103,8 +100,6 @@ public enum Allergen: String, Codable, Identifiable, Hashable, CaseIterable {
                 return .init("eggs", bundle: .module)
             case .sesameSeeds:
                 return .init("sesame", bundle: .module)
-            case .wheat:
-                return .init("wheat", bundle: .module)
         }
     }
     
