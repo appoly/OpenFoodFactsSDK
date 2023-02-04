@@ -66,4 +66,17 @@ public struct ProductResponse: Codable {
         analysisTags = try container.decode([AnalysisTag].self, forKey: .analysisTags)
     }
     
+    
+    
+    // MARK: - Utilities
+    
+    public func safe(forDiet diet: Diet) -> Bool {
+        switch diet {
+            case .vegetarian:
+                return analysisTags.contains(.vegetarian) || analysisTags.contains(.vegan)
+        case .vegan:
+                return analysisTags.contains(.vegan)
+        }
+    }
+    
 }
