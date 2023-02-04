@@ -86,6 +86,53 @@ final class OpenFoodFactsSDKTests: XCTestCase {
     }
     
     
+    func testSafeForAllergies() {
+        let json = """
+        {
+            "code": "12345",
+            "product": {
+                "allergens_tags": ["en:crustaceans", "en:peanuts"],
+                "brands_tags": ["brand_name_1", "brand_name_2"],
+                "categories_tags": ["category_name_1", "category_name_2"],
+                "generic_name_en": "Generic Name",
+                "product_name_en": "Product Name",
+                "quantity": "1kg",
+                "ingredients_text_en": "Ingredients Text",
+                "ingredients_analysis_tags": ["en:vegan"],
+                "nutriments": {
+                    "carbohydrates_100g": 1,
+                    "carbohydrates_unit": "g",
+                    "energy-kcal_100g": 2,
+                    "energy-kcal_unit": "kcal",
+                    "fat_100g": 3,
+                    "fat_unit": "g",
+                    "proteins_100g": 4,
+                    "proteins_unit": "g",
+                    "salt_100g": 5,
+                    "salt_unit": "g",
+                    "saturated-fat_100g": 6,
+                    "saturated-fat_unit": "g",
+                    "sodium_100g": 7,
+                    "sodium_unit": "g",
+                    "sugars_100g": 8,
+                    "sugars_unit": "g"
+                }
+            }
+        }
+        """
+        
+        let data = json.data(using: .utf8)!
+        
+        do {
+            let productResponse = try JSONDecoder().decode(ProductResponse.self, from: data)
+            
+            XCTAssertEqual(productResponse.safe(forAllergies: [.peanuts, .crustaceans]), false)
+        } catch {
+            XCTFail("Failed to decode ProductResponse with error: \(error)")
+        }
+    }
+    
+    
     func testSafeForVegans() {
         let json = """
         {

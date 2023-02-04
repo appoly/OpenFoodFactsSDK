@@ -79,4 +79,11 @@ public struct ProductResponse: Codable {
         }
     }
     
+    
+    public func safe(forAllergies alleries: [Allergen]) -> Bool {
+        let product = Set(self.allergens)
+        let user = Set(alleries)
+        return product.intersection(user).count == 0
+    }
+    
 }
