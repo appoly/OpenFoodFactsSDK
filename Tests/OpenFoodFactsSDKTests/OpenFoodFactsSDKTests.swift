@@ -29,6 +29,7 @@ final class OpenFoodFactsSDKTests: XCTestCase {
                 "quantity": "1kg",
                 "ingredients_text_en": "Ingredients Text",
                 "ingredients_analysis_tags": ["en:palm-oil-free", "en:maybe-vegan", "en:maybe-vegetarian"],
+                "states": "en:ingredients-to-be-completed",
                 "nutriments": {
                     "carbohydrates_100g": 1,
                     "carbohydrates_unit": "g",
@@ -62,7 +63,6 @@ final class OpenFoodFactsSDKTests: XCTestCase {
             XCTAssertEqual(productResponse.genericName, "Generic Name")
             XCTAssertEqual(productResponse.productName, "Product Name")
             XCTAssertEqual(productResponse.quantity, "1kg")
-            XCTAssertEqual(productResponse.ingredientsVerified, false)
             XCTAssertEqual(productResponse.ingredients, "Ingredients Text")
             XCTAssertEqual(productResponse.nutriments.carbohydrates100G, 1)
             XCTAssertEqual(productResponse.nutriments.carbohydratesUnit, "g")
@@ -81,6 +81,7 @@ final class OpenFoodFactsSDKTests: XCTestCase {
             XCTAssertEqual(productResponse.nutriments.sodiumUnit, "g")
             XCTAssertEqual(productResponse.nutriments.sugars100G, 8)
             XCTAssertEqual(productResponse.nutriments.sugarsUnit, "g")
+            XCTAssertEqual(productResponse.safe(forDiet: .vegetarian), .unknown)
         } catch {
             XCTFail("Failed to decode ProductResponse with error: \(error)")
         }
@@ -100,7 +101,7 @@ final class OpenFoodFactsSDKTests: XCTestCase {
                 "quantity": "1kg",
                 "ingredients_text_en": "Ingredients Text",
                 "ingredients_analysis_tags": ["en:vegan"],
-                "states": "en:ingredients-to-be-completed",
+                "states": "",
                 "nutriments": {
                     "carbohydrates_100g": 1,
                     "carbohydrates_unit": "g",
@@ -128,7 +129,7 @@ final class OpenFoodFactsSDKTests: XCTestCase {
         do {
             let productResponse = try JSONDecoder().decode(ProductResponse.self, from: data)
             
-            XCTAssertEqual(productResponse.safe(forAllergies: [.peanuts, .crustaceans]), false)
+            XCTAssertEqual(productResponse.safe(forAllergies: [.peanuts, .crustaceans]), .unsafe)
         } catch {
             XCTFail("Failed to decode ProductResponse with error: \(error)")
         }
@@ -148,7 +149,7 @@ final class OpenFoodFactsSDKTests: XCTestCase {
                 "quantity": "1kg",
                 "ingredients_text_en": "Ingredients Text",
                 "ingredients_analysis_tags": ["en:vegan"],
-                "states": "en:ingredients-to-be-completed",
+                "states": "",
                 "nutriments": {
                     "carbohydrates_100g": 1,
                     "carbohydrates_unit": "g",
@@ -176,7 +177,7 @@ final class OpenFoodFactsSDKTests: XCTestCase {
         do {
             let productResponse = try JSONDecoder().decode(ProductResponse.self, from: data)
             
-            XCTAssertEqual(productResponse.safe(forDiet: .vegan), true)
+            XCTAssertEqual(productResponse.safe(forDiet: .vegan), .safe)
         } catch {
             XCTFail("Failed to decode ProductResponse with error: \(error)")
         }
@@ -196,7 +197,7 @@ final class OpenFoodFactsSDKTests: XCTestCase {
                 "quantity": "1kg",
                 "ingredients_text_en": "Ingredients Text",
                 "ingredients_analysis_tags": ["en:vegetarian"],
-                "states": "en:ingredients-to-be-completed",
+                "states": "",
                 "nutriments": {
                     "carbohydrates_100g": 1,
                     "carbohydrates_unit": "g",
@@ -224,7 +225,7 @@ final class OpenFoodFactsSDKTests: XCTestCase {
         do {
             let productResponse = try JSONDecoder().decode(ProductResponse.self, from: data)
             
-            XCTAssertEqual(productResponse.safe(forDiet: .vegetarian), true)
+            XCTAssertEqual(productResponse.safe(forDiet: .vegetarian), .safe)
         } catch {
             XCTFail("Failed to decode ProductResponse with error: \(error)")
         }

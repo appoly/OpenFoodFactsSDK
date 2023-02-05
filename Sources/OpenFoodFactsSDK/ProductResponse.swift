@@ -24,7 +24,7 @@ public struct ProductResponse: Codable {
     let ingredients: String
     let nutriments: NutrimentsResponse
     let analysisTags: [AnalysisTag]
-    let ingredientsVerified: Bool
+    private let ingredientsVerified: Bool
     
     
     
@@ -67,7 +67,7 @@ public struct ProductResponse: Codable {
         ingredients = try container.decode(String.self, forKey: .ingredients)
         nutriments = try container.decode(NutrimentsResponse.self, forKey: .nutriments)
         analysisTags = try container.decode([AnalysisTag].self, forKey: .analysisTags)
-        ingredientsVerified = try container.decode(String.self, forKey: .states).contains("en:ingredients-to-be-completed")
+        ingredientsVerified = !(try container.decode(String.self, forKey: .states).contains("en:ingredients-to-be-completed"))
     }
     
     
@@ -93,20 +93,22 @@ public struct ProductResponse: Codable {
     
     // MARK: - Utilities
     
-    public func safe(forDiet diet: Diet) -> Bool {
+    public func safe(forDiet diet: Diet) -> SafetyStatus {
+        guard ingredientsVerified else { return .unknown }
         switch diet {
             case .vegetarian:
-                return analysisTags.contains(.vegetarian) || analysisTags.contains(.vegan)
+                return (analysisTags.contains(.vegetarian) || analysisTags.contains(.vegan)) ? .safe : .unsafe
         case .vegan:
-                return analysisTags.contains(.vegan)
+            return analysisTags.contains(.vegan) ? .safe: .unsafe
         }
     }
     
     
-    public func safe(forAllergies alleries: [Allergen]) -> Bool {
+    public func safe(forAllergies alleries: [Allergen]) -> SafetyStatus {
+        guard ingredientsVerified else { return .unknown }
         let product = Set(self.allergens)
         let user = Set(alleries)
-        return product.intersection(user).count == 0
+        return product.intersection(user).count == 0 ? .safe : .unsafe
     }
     
 }
