@@ -25,7 +25,7 @@ public struct ProductResponse: Codable, Identifiable {
     public let ingredients: String
     public let nutriments: NutrimentsResponse
     public let analysisTags: [AnalysisTag]
-    private let ingredientsVerified: Bool
+    public let ingredientsVerified: Bool
     
     public var id: String { return barcode }
     
