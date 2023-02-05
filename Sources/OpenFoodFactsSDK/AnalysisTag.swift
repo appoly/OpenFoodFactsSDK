@@ -32,7 +32,7 @@ public enum AnalysisTag: String, Codable, Identifiable, Hashable, CaseIterable {
     
     // MARK: - Variables
     
-    var id: String { return rawValue }
+    public var id: String { return rawValue }
     
     public var name: String {
         switch self {
