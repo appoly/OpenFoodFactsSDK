@@ -11,10 +11,11 @@ import SwiftUI
 
 
 
-public struct ProductResponse: Codable {
+public struct ProductResponse: Codable, Identifiable {
     
     // MARK: - Variables
     
+    let barcode: String
     let allergens: [Allergen]
     let brands: [String]
     let categories: [String]
@@ -25,6 +26,8 @@ public struct ProductResponse: Codable {
     let nutriments: NutrimentsResponse
     let analysisTags: [AnalysisTag]
     private let ingredientsVerified: Bool
+    
+    public var id: String { return barcode }
     
     
     
@@ -56,6 +59,7 @@ public struct ProductResponse: Codable {
     
     public init(from decoder: Decoder) throws {
         let parent = try decoder.container(keyedBy: ParentKeys.self)
+        barcode = try parent.decode(String.self, forKey: .code)
         let container = try parent.nestedContainer(keyedBy: CodingKeys.self, forKey: .product)
         
         allergens = try container.decode([Allergen].self, forKey: .allergens)
