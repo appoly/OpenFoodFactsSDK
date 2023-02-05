@@ -15,11 +15,11 @@ public struct NutrimentsResponse: Codable {
     
     // MARK: - Variables
     
-    public let carbohydrates100G: Int
+    public let carbohydrates100G: Double
     public let carbohydratesUnit: String
-    public let energyKcal100G: Int
+    public let energyKcal100G: Double
     public let energyKcalUnit: String
-    public let fat100G: Int
+    public let fat100G: Double
     public let fatUnit: String
     public let proteins100G: Double
     public let proteinsUnit: String
