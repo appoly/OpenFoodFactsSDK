@@ -15,22 +15,22 @@ public struct NutrimentsResponse: Codable {
     
     // MARK: - Variables
     
-    let carbohydrates100G: Int
-    let carbohydratesUnit: String
-    let energyKcal100G: Int
-    let energyKcalUnit: String
-    let fat100G: Int
-    let fatUnit: String
-    let proteins100G: Double
-    let proteinsUnit: String
-    let salt100G: Double
-    let saltUnit: String
-    let saturatedFat100G: Double
-    let saturatedFatUnit: String
-    let sodium100G: Double
-    let sodiumUnit: String
-    let sugars100G: Double
-    let sugarsUnit: String
+    public let carbohydrates100G: Int
+    public let carbohydratesUnit: String
+    public let energyKcal100G: Int
+    public let energyKcalUnit: String
+    public let fat100G: Int
+    public let fatUnit: String
+    public let proteins100G: Double
+    public let proteinsUnit: String
+    public let salt100G: Double
+    public let saltUnit: String
+    public let saturatedFat100G: Double
+    public let saturatedFatUnit: String
+    public let sodium100G: Double
+    public let sodiumUnit: String
+    public let sugars100G: Double
+    public let sugarsUnit: String
 
     
     

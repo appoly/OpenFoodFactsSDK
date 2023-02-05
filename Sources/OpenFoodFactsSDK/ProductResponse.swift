@@ -15,16 +15,16 @@ public struct ProductResponse: Codable, Identifiable {
     
     // MARK: - Variables
     
-    let barcode: String
-    let allergens: [Allergen]
-    let brands: [String]
-    let categories: [String]
-    let genericName: String
-    let productName: String
-    let quantity: String
-    let ingredients: String
-    let nutriments: NutrimentsResponse
-    let analysisTags: [AnalysisTag]
+    public let barcode: String
+    public let allergens: [Allergen]
+    public let brands: [String]
+    public let categories: [String]
+    public let genericName: String
+    public let productName: String
+    public let quantity: String
+    public let ingredients: String
+    public let nutriments: NutrimentsResponse
+    public let analysisTags: [AnalysisTag]
     private let ingredientsVerified: Bool
     
     public var id: String { return barcode }

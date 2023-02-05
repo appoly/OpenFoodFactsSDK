@@ -11,7 +11,7 @@ import Foundation
 
 
 
-enum AnalysisTag: String, Codable, Identifiable, Hashable, CaseIterable {
+public enum AnalysisTag: String, Codable, Identifiable, Hashable, CaseIterable {
     
     // MARK: - Cases
     
@@ -34,7 +34,7 @@ enum AnalysisTag: String, Codable, Identifiable, Hashable, CaseIterable {
     
     var id: String { return rawValue }
     
-    var name: String {
+    public var name: String {
         switch self {
             case .vegetarianStatusUnknown:
                 return "Vegetarian Status Unknown"
